@@ -47,7 +47,6 @@ export default function TabLayout() {
 							backgroundColor: "#0a0f1c",
 						},
 						headerTintColor: "white",
-
 						tabBarIcon: ({ color, focused }) =>
 							pathName !== "/Control" && (
 								<FontAwesome6

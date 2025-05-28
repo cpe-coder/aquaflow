@@ -71,7 +71,7 @@ export default function SignIn() {
 					}}
 				>
 					<View className="items-center -mt-20 justify-center">
-						<Text className="text-5xl text-primary font-bold text-center">
+						<Text className="text-5xl text-white font-bold text-center">
 							RIPE SENSEI
 						</Text>
 
@@ -96,7 +96,7 @@ export default function SignIn() {
 						otherStyles="mt-7"
 					/>
 					<Text
-						className={`text-lg text-secondary font-semibold text-center py-1 px-4 ${
+						className={`text-lg text-white font-semibold text-center py-1 px-4 ${
 							errorMessage ? "block" : "hidden"
 						}`}
 					>
@@ -104,7 +104,7 @@ export default function SignIn() {
 					</Text>
 
 					<Text
-						className={`text-lg text-green-500 font-semibold text-center py-1 ${
+						className={`text-lg text-background font-semibold text-center py-1 ${
 							successMessage ? "block" : "hidden"
 						}`}
 					>
@@ -125,9 +125,7 @@ export default function SignIn() {
 							Dont have an account?
 						</Text>
 						<TouchableOpacity onPress={handleRoute}>
-							<Text className="text-lg font-psemibold text-primary">
-								Sign-Up
-							</Text>
+							<Text className="text-lg font-psemibold text-white">Sign-Up</Text>
 						</TouchableOpacity>
 					</View>
 				</View>

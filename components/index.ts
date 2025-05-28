@@ -1,3 +1,4 @@
+import Records from "@/components/records";
 import CustomButton from "./custom-button";
 import DrawerIcon from "./drawer-icon";
 import Header from "./header";
@@ -13,5 +14,6 @@ export {
 	InputField,
 	Logout,
 	ProfileInfo,
+	Records,
 	Settings,
 };

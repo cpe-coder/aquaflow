@@ -14,7 +14,7 @@ const HeaderRight = () => {
 			<View className="rounded-full">
 				<Pressable
 					onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
-					className="text-white rounded-full bg-gray-800"
+					className="text-white rounded-full bg-white"
 				>
 					<Image
 						source={!userImage ? icon.user : { uri: userImage.image }}

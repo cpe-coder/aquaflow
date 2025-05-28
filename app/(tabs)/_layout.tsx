@@ -27,10 +27,10 @@ export default function TabLayout() {
 			<Tabs
 				screenOptions={{
 					headerShadowVisible: false,
-					tabBarActiveTintColor: "#00ffb2",
+					tabBarActiveTintColor: "white",
 					tabBarInactiveTintColor: "white",
 					tabBarStyle: {
-						backgroundColor: "#0a0f1c",
+						backgroundColor: "#ae4550",
 						borderTopWidth: 0,
 					},
 				}}
@@ -44,7 +44,7 @@ export default function TabLayout() {
 							return pathName === "/Control" ? "" : <Header.HeaderRight />;
 						},
 						headerStyle: {
-							backgroundColor: "#0a0f1c",
+							backgroundColor: "#ae4550",
 						},
 						headerTintColor: "white",
 

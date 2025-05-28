@@ -24,7 +24,6 @@ const Settings = () => {
 	const { userImage, userData } = useAuth();
 	const [mediaPermission, requestMediaPermission] =
 		useMediaLibraryPermissions();
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [refreshing, setRefreshing] = React.useState(false);
 
 	const onRefresh = React.useCallback(() => {
@@ -78,7 +77,7 @@ const Settings = () => {
 					<View className="flex w-full justify-center items-center pt-5">
 						<Image
 							source={!userImage ? icon.user : { uri: userImage.image }}
-							className="w-28 h-28 border border-primary rounded-full"
+							className="w-28 h-28 border border-white rounded-full"
 						/>
 
 						<Text className="text-text py-5 font-bold text-2xl">
@@ -92,9 +91,7 @@ const Settings = () => {
 							</View>
 							<View>
 								<Text className=" text-lg text-text">Email Account</Text>
-								<Text className="text-secondText text-xs">
-									{userData?.email}
-								</Text>
+								<Text className="text-gray-300 text-xs">{userData?.email}</Text>
 							</View>
 						</Pressable>
 						<Pressable

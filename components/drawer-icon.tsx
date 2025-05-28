@@ -8,7 +8,7 @@ interface DrawerIconProps {
 
 const DrawerIcon: React.FC<DrawerIconProps> = ({ icon, color }) => {
 	return (
-		<View className="items-center justify-center rounded-xl bg-gray-300/30 p-2 ">
+		<View className="items-center justify-center rounded-xl bg-gray-500/30 p-2 ">
 			<Image
 				source={icon}
 				resizeMode="contain"

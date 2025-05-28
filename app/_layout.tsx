@@ -17,7 +17,7 @@ export default function RootLayout() {
 			<Drawer
 				screenOptions={{
 					drawerStyle: {
-						backgroundColor: "#0a0f1c",
+						backgroundColor: "#ae4550",
 					},
 				}}
 				drawerContent={(props) => (
@@ -32,8 +32,8 @@ export default function RootLayout() {
 								}}
 								focused={pathName === "/Home" && true}
 								inactiveTintColor="white"
-								activeBackgroundColor="#002b2e"
-								activeTintColor="#00ffb2"
+								activeBackgroundColor="white"
+								activeTintColor="#ae4550"
 								style={{
 									borderRadius: 12,
 									margin: 0,

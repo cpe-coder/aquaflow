@@ -47,7 +47,7 @@ export default function Welcome() {
 				</Text>
 				<View className="w-full h-auto bg-white rounded-md">
 					<Image
-						className="w-[220px] h-[220px]"
+						className=" w-full"
 						source={images.Logo}
 						resizeMode="contain"
 					/>

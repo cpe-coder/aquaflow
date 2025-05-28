@@ -7,16 +7,10 @@ import {
 	PanResponder,
 	PanResponderGestureState,
 	Text,
-	TouchableOpacity,
 	View,
 } from "react-native";
-
 export default function Welcome() {
 	const router = useRouter();
-
-	const handlePress = () => {
-		router.push("/Home");
-	};
 
 	const panResponder = useRef(
 		PanResponder.create({
@@ -24,12 +18,10 @@ export default function Welcome() {
 				evt: GestureResponderEvent,
 				gestureState: PanResponderGestureState
 			) => {
-				// Detect horizontal swipe
 				return Math.abs(gestureState.dx) > 20 && Math.abs(gestureState.dy) < 20;
 			},
 			onPanResponderRelease: (evt, gestureState) => {
-				if (gestureState.dx < -50) {
-					// Swipe left
+				if (gestureState.dx < 50) {
 					router.push("/Home");
 				}
 			},
@@ -41,27 +33,18 @@ export default function Welcome() {
 			className="flex-1 items-center justify-center bg-background px-8"
 			{...panResponder.panHandlers}
 		>
-			<View className="flex flex-col gap-4 justify-center items-center">
+			<View className="flex-1 justify-between py-40 items-center">
 				<Text className="text-center text-wrap font-bold text-4xl text-white">
 					Welcome to Aquaflow
 				</Text>
-				<View className="w-full h-auto bg-white rounded-md">
-					<Image
-						className=" w-full"
-						source={images.Logo}
-						resizeMode="contain"
-					/>
-				</View>
-			</View>
-			<View className="absolute bottom-24 w-full">
-				<TouchableOpacity
-					onPress={handlePress}
-					className="bg-secondary rounded-xl py-5 px-20"
-				>
-					<Text className="text-text font-semibold text-center text-xl">
-						Continue
-					</Text>
-				</TouchableOpacity>
+				<Image
+					className="w-[380px] h-[100px] bg-white  rounded-md"
+					source={images.Logo}
+					resizeMode="contain"
+				/>
+				<Text className="text-text font-semibold text-center text-xl">
+					Swipe right to continue
+				</Text>
 			</View>
 		</View>
 	);

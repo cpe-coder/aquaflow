@@ -1,12 +1,10 @@
-import { Header } from "@/components";
 import { useAuth } from "@/context/auth-context";
-import { Redirect, Tabs, usePathname } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 import React from "react";
 
 export default function TabLayout() {
 	const { authState } = useAuth();
 	const [isAuthenticated, setIsAthenticated] = React.useState(false);
-	const pathName = usePathname();
 
 	React.useEffect(() => {
 		if (!authState?.authenticated) {
@@ -37,10 +35,6 @@ export default function TabLayout() {
 				<Tabs.Screen
 					name="Home"
 					options={{
-						title: "Home",
-						headerRight: () => {
-							return pathName === "/Control" ? "" : <Header.HeaderRight />;
-						},
 						headerStyle: {
 							backgroundColor: "#ae4550",
 						},

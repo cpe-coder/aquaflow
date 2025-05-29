@@ -47,7 +47,7 @@ export default function Welcome() {
 					<Image
 						tintColor={"white"}
 						source={icon.swipe}
-						className="h-10 w-10"
+						className="h-20 w-20 self-center"
 					/>
 					<Text className="text-text font-semibold text-center text-xl">
 						Swipe right to continue

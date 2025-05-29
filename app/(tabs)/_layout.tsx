@@ -1,6 +1,5 @@
 import { Header } from "@/components";
 import { useAuth } from "@/context/auth-context";
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { Redirect, Tabs, usePathname } from "expo-router";
 import React from "react";
 
@@ -38,7 +37,6 @@ export default function TabLayout() {
 				<Tabs.Screen
 					name="Home"
 					options={{
-						href: pathName === "/Control" ? null : undefined,
 						title: "Home",
 						headerRight: () => {
 							return pathName === "/Control" ? "" : <Header.HeaderRight />;
@@ -47,16 +45,6 @@ export default function TabLayout() {
 							backgroundColor: "#ae4550",
 						},
 						headerTintColor: "white",
-
-						tabBarIcon: ({ color, focused }) =>
-							pathName !== "/Control" && (
-								<FontAwesome6
-									size={24}
-									name="house"
-									color={color}
-									focusable={focused}
-								/>
-							),
 					}}
 				/>
 			</Tabs>

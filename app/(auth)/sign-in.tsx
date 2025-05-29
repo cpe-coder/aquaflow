@@ -72,7 +72,7 @@ export default function SignIn() {
 				>
 					<View className="items-center -mt-20 justify-center">
 						<Text className="text-5xl text-white font-bold text-center">
-							RIPE SENSEI
+							AQUAFLOW
 						</Text>
 
 						<Text className="text-2xl text-center text-text mt-10 font-bold">
@@ -104,7 +104,7 @@ export default function SignIn() {
 					</Text>
 
 					<Text
-						className={`text-lg text-background font-semibold text-center py-1 ${
+						className={`text-lg text-green-500 font-semibold text-center py-1 ${
 							successMessage ? "block" : "hidden"
 						}`}
 					>

@@ -21,27 +21,7 @@ export default function TabLayout() {
 
 	return (
 		<>
-			<Tabs
-				screenOptions={{
-					headerShadowVisible: false,
-					tabBarActiveTintColor: "white",
-					tabBarInactiveTintColor: "white",
-					tabBarStyle: {
-						backgroundColor: "#ae4550",
-						borderTopWidth: 0,
-					},
-				}}
-			>
-				<Tabs.Screen
-					name="Home"
-					options={{
-						headerStyle: {
-							backgroundColor: "#ae4550",
-						},
-						headerTintColor: "white",
-					}}
-				/>
-			</Tabs>
+			<Tabs></Tabs>
 		</>
 	);
 }

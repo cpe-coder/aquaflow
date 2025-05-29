@@ -1,5 +1,5 @@
 import { useAuth } from "@/context/auth-context";
-import { Redirect, Tabs } from "expo-router";
+import { Redirect, Stack } from "expo-router";
 import React from "react";
 
 export default function TabLayout() {
@@ -21,29 +21,18 @@ export default function TabLayout() {
 
 	return (
 		<>
-			<Tabs>
-				<Tabs.Screen
+			<Stack>
+				<Stack.Screen
 					name="Home"
 					options={{
 						title: "Home",
-						headerShown: false,
+						headerStyle: {
+							backgroundColor: "#ae4550",
+						},
+						headerTintColor: "white",
 					}}
 				/>
-				<Tabs.Screen
-					name="Profile"
-					options={{
-						title: "Profile",
-						headerShown: false,
-					}}
-				/>
-				<Tabs.Screen
-					name="Settings"
-					options={{
-						title: "Settings",
-						headerShown: false,
-					}}
-				/>
-			</Tabs>
+			</Stack>
 		</>
 	);
 }

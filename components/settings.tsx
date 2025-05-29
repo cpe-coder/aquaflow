@@ -17,7 +17,6 @@ import {
 	TouchableOpacity,
 	View,
 } from "react-native";
-import DrawerIcon from "./drawer-icon";
 
 const Settings = () => {
 	const [visible, setVisible] = React.useState(false);
@@ -52,15 +51,12 @@ const Settings = () => {
 	return (
 		<View className="flex">
 			<TouchableOpacity
-				style={{
-					borderRadius: 12,
-				}}
-				className="flex-row items-center font-bold"
 				onPress={() => setVisible((prev) => !prev)}
+				className="flex-col items-center justify-center"
 			>
-				<DrawerIcon color="white" icon={icon.settings} />
+				<Image source={icon.settings} tintColor={"white"} className="w-8 h-8" />
+				<Text className="text-white">Settings</Text>
 			</TouchableOpacity>
-
 			<Modal
 				transparent
 				visible={visible}

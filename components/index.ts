@@ -6,6 +6,7 @@ import InputField from "./input-fields";
 import Logout from "./logout";
 import ProfileInfo from "./profile-info";
 import Settings from "./settings";
+import Tabs from "./tabs";
 
 export {
 	CustomButton,
@@ -16,4 +17,5 @@ export {
 	ProfileInfo,
 	Records,
 	Settings,
+	Tabs,
 };

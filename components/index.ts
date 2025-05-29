@@ -1,4 +1,5 @@
 import Records from "@/components/records";
+import Control from "./control";
 import CustomButton from "./custom-button";
 import DrawerIcon from "./drawer-icon";
 import Header from "./header";
@@ -9,6 +10,7 @@ import Settings from "./settings";
 import Tabs from "./tabs";
 
 export {
+	Control,
 	CustomButton,
 	DrawerIcon,
 	Header,

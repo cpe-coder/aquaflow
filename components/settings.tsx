@@ -23,6 +23,7 @@ const Settings = () => {
 	const { userImage, userData } = useAuth();
 	const [mediaPermission, requestMediaPermission] =
 		useMediaLibraryPermissions();
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [refreshing, setRefreshing] = React.useState(false);
 
 	const onRefresh = React.useCallback(() => {

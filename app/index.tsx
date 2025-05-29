@@ -1,3 +1,4 @@
+import { icon } from "@/constant/icon";
 import { images } from "@/constant/images";
 import { useRouter } from "expo-router";
 import React, { useRef } from "react";
@@ -21,7 +22,7 @@ export default function Welcome() {
 				return Math.abs(gestureState.dx) > 20 && Math.abs(gestureState.dy) < 20;
 			},
 			onPanResponderRelease: (evt, gestureState) => {
-				if (gestureState.dx < 50) {
+				if (gestureState.dx < 20) {
 					router.push("/Home");
 				}
 			},
@@ -42,9 +43,16 @@ export default function Welcome() {
 					source={images.Logo}
 					resizeMode="contain"
 				/>
-				<Text className="text-text font-semibold text-center text-xl">
-					Swipe right to continue
-				</Text>
+				<View>
+					<Image
+						tintColor={"white"}
+						source={icon.swipe}
+						className="h-10 w-10"
+					/>
+					<Text className="text-text font-semibold text-center text-xl">
+						Swipe right to continue
+					</Text>
+				</View>
 			</View>
 		</View>
 	);

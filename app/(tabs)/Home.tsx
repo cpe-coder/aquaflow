@@ -1,9 +1,26 @@
 import { Tabs } from "@/components";
 import { images } from "@/constant/images";
+import { useNavigation } from "expo-router";
+import * as ScreenOrientation from "expo-screen-orientation";
 import React from "react";
 import { Image, Text, View } from "react-native";
 
 export default function Home() {
+	const navigation = useNavigation();
+	React.useEffect(() => {
+		const unsubscribe = navigation.addListener("focus", () => {
+			try {
+				ScreenOrientation.lockAsync(
+					ScreenOrientation.OrientationLock.PORTRAIT_UP
+				);
+			} catch (error) {
+				console.log(error);
+			}
+		});
+
+		return unsubscribe;
+	}, [navigation]);
+
 	return (
 		<View className="bg-background h-full w-full px-8">
 			<View className="flex-col items-center justify-center gap-3 py-5">

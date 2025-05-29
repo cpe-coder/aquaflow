@@ -1,9 +1,27 @@
 import { icon } from "@/constant/icon";
+import { useNavigation } from "expo-router";
+import * as ScreenOrientation from "expo-screen-orientation";
 import React from "react";
 import { Image, Modal, Text, TouchableOpacity, View } from "react-native";
 
 const Control = () => {
+	const navigation = useNavigation();
 	const [visible, setVisible] = React.useState(false);
+
+	React.useEffect(() => {
+		const unsubscribe = navigation.addListener("focus", () => {
+			try {
+				ScreenOrientation.lockAsync(
+					ScreenOrientation.OrientationLock.LANDSCAPE_RIGHT
+				);
+				setVisible(true);
+			} catch (error) {
+				console.log(error);
+			}
+		});
+
+		return unsubscribe;
+	}, [navigation, visible]);
 
 	return (
 		<View className="flex">

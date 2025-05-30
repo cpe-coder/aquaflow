@@ -32,6 +32,17 @@ export default function TabLayout() {
 						headerTintColor: "white",
 					}}
 				/>
+				<Stack.Screen
+					name="Control"
+					options={{
+						headerShown: false,
+						title: "Control",
+						headerStyle: {
+							backgroundColor: "#ae4550",
+						},
+						headerTintColor: "white",
+					}}
+				/>
 			</Stack>
 		</>
 	);

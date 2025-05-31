@@ -7,14 +7,14 @@ import { getDatabase } from "firebase/database";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-	apiKey: "AIzaSyCn2iJdbQBA1ZDPdTACuvB12yJS9Wf3UC8",
-	authDomain: "agribot-10b8b.firebaseapp.com",
-	databaseURL: "https://agribot-10b8b-default-rtdb.firebaseio.com",
-	projectId: "agribot-10b8b",
-	storageBucket: "agribot-10b8b.firebasestorage.app",
-	messagingSenderId: "703897361050",
-	appId: "1:703897361050:web:2b9296959a2772d57e5d23",
-	measurementId: "G-KLS74LCVEF",
+	apiKey: "AIzaSyA-tZ8Rh50jHVxVTkPQ1O0B24_ek6Y6HdE",
+	authDomain: "aquaflow-b5a38.firebaseapp.com",
+	databaseURL: "https://aquaflow-b5a38-default-rtdb.firebaseio.com",
+	projectId: "aquaflow-b5a38",
+	storageBucket: "aquaflow-b5a38.firebasestorage.app",
+	messagingSenderId: "711852620974",
+	appId: "1:711852620974:web:51cfc6b41ff9728003813f",
+	measurementId: "G-BMQH1MELL0",
 };
 
 // Initialize Firebase

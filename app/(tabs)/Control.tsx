@@ -1,4 +1,4 @@
-import { icon } from "@/constant/icon";
+import { ImageViewer } from "@/components";
 import database from "@/utils/firebase.config";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
@@ -7,7 +7,6 @@ import * as ScreenOrientation from "expo-screen-orientation";
 import { ref, set } from "firebase/database";
 import React from "react";
 import {
-	Animated,
 	Modal,
 	PanResponder,
 	Text,
@@ -48,14 +47,12 @@ function Trootle(props: {
 
 export default function Control() {
 	const navigation = useNavigation();
-	const [isVisible, setIsVisible] = React.useState(false);
 	const router = useRouter();
+
+	const [isVisible, setIsVisible] = React.useState(false);
 	const [power, setPower] = React.useState(MID_VALUE);
 	const [position, setPosition] = React.useState(SLIDER_HEIGHT / 2);
-	const rotation = React.useRef(new Animated.Value(90)).current;
 	const [wheelDegree, setWheelDegree] = React.useState(90);
-	const [lastRotation, setLastRotation] = React.useState(90);
-	const [gestureStartRotation, setGestureStartRotation] = React.useState(90);
 
 	React.useEffect(() => {
 		const unsubscribe = navigation.addListener("focus", () => {
@@ -73,12 +70,9 @@ export default function Control() {
 	}, [navigation]);
 
 	React.useEffect(() => {
-		console.log("Wheel: ", rotation);
-		console.log("Wheel: ", wheelDegree);
-
 		setActivePower();
 		setActiveWheel();
-	});
+	}, [power, wheelDegree]);
 
 	const handleBackPress = () => {
 		router.push("/Home");
@@ -98,31 +92,6 @@ export default function Control() {
 			);
 			setPower(newValue);
 		},
-		onPanResponderGrant: () => {},
-		onPanResponderRelease: () => {},
-	});
-
-	const steeringWheelResponder = PanResponder.create({
-		onStartShouldSetPanResponder: () => true,
-		onMoveShouldSetPanResponder: () => true,
-		onPanResponderGrant: () => {
-			setGestureStartRotation(lastRotation); // Save rotation at gesture start
-		},
-		onPanResponderMove: (_, gestureState) => {
-			const { dx } = gestureState;
-			let newRotation = Math.round(
-				Math.max(0, Math.min(180, gestureStartRotation + dx * 1)) // Increase sensitivity if needed
-			);
-			rotation.setValue(newRotation);
-			setWheelDegree(newRotation);
-		},
-		onPanResponderRelease: (_, gestureState) => {
-			const { dx } = gestureState;
-			let newRotation = Math.round(
-				Math.max(0, Math.min(180, gestureStartRotation + dx * 1))
-			);
-			setLastRotation(newRotation); // Save the new rotation as lastRotation
-		},
 	});
 
 	const setActivePower = async () => {
@@ -133,6 +102,7 @@ export default function Control() {
 			console.log("Error setting power value:", error);
 		}
 	};
+
 	const setActiveWheel = async () => {
 		try {
 			const valueRef = ref(database, "Controls/wheel");
@@ -142,9 +112,39 @@ export default function Control() {
 		}
 	};
 
-	const handleReset = () => {
-		setPower(MID_VALUE);
-		setPosition(SLIDER_HEIGHT / 2);
+	const handleLeft = () => {
+		setWheelDegree((prev) => Math.max(0, prev - 10));
+	};
+
+	const handleRight = () => {
+		setWheelDegree((prev) => Math.min(180, prev + 10));
+	};
+
+	const intervalRef = React.useRef<ReturnType<typeof setInterval> | null>(null);
+
+	const startAutoAdjust = (direction: "left" | "right") => {
+		stopAutoAdjust();
+		intervalRef.current = setInterval(() => {
+			setWheelDegree((prev) => {
+				const next = direction === "left" ? prev - 1 : prev + 1;
+				if (next < 0 || next > 180) {
+					stopAutoAdjust();
+					return prev;
+				}
+				return next;
+			});
+		}, 100);
+	};
+
+	const stopAutoAdjust = () => {
+		if (intervalRef.current) {
+			clearInterval(intervalRef.current);
+			intervalRef.current = null;
+		}
+	};
+
+	const handleResetWheel = () => {
+		setWheelDegree(90);
 	};
 
 	return (
@@ -152,51 +152,57 @@ export default function Control() {
 			<View className="bg-background h-screen w-screen"></View>
 			<Modal visible={isVisible} animationType="fade">
 				<View className="bg-background h-full w-full px-8 flex-row">
-					<View className="h-full w-52">
-						<View>
-							<TouchableOpacity
-								onPress={handleBackPress}
-								className="p-2  bg-background rounded-full"
-							>
-								<Ionicons name="arrow-back" size={24} color="white" />
-							</TouchableOpacity>
-						</View>
-						<View
-							className="w-40 h-40 items-center justify-center -rotate-90"
-							{...steeringWheelResponder.panHandlers}
+					<View className="h-full w-52 flex-row gap-2 items-center justify-center space-y-4">
+						<TouchableOpacity
+							onPress={handleBackPress}
+							className="p-2 bg-background rounded-full absolute top-4 left-4"
 						>
-							<Animated.Image
-								source={icon.steeringWheel}
-								height={0}
-								width={0}
-								className="w-40 h-40"
-								style={{
-									transform: [
-										{
-											rotate: rotation.interpolate({
-												inputRange: [0, 180],
-												outputRange: ["0deg", "180deg"],
-											}),
-										},
-									],
-								}}
-							/>
-						</View>
+							<Ionicons name="arrow-back" size={24} color="white" />
+						</TouchableOpacity>
+
+						<TouchableOpacity
+							onPressIn={() => startAutoAdjust("left")}
+							onPressOut={stopAutoAdjust}
+							onPress={handleLeft}
+							className="bg-white rounded-full p-4"
+						>
+							<Ionicons name="arrow-back" size={24} color="black" />
+						</TouchableOpacity>
+
+						<TouchableOpacity
+							onPress={handleResetWheel}
+							className="bg-red-500 h-10 w-10  rounded-full "
+						></TouchableOpacity>
+
+						<TouchableOpacity
+							onPressIn={() => startAutoAdjust("right")}
+							onPressOut={stopAutoAdjust}
+							onPress={handleRight}
+							className="bg-white rounded-full p-4"
+						>
+							<Ionicons name="arrow-forward" size={24} color="black" />
+						</TouchableOpacity>
 					</View>
-					<View className="flex-1 h-full bg-background2"></View>
-					<View className="h-full w-52">
-						<View className=" right-0">
-							<TouchableOpacity
-								className="bg-green-500 rounded-full px-3 py-2"
-								onPress={handleReset}
-							>
-								<Text className="font-bold text-xl text-white">N</Text>
-							</TouchableOpacity>
-						</View>
+
+					<View className="flex-1 h-full items-center justify-center">
+						<ImageViewer />
+					</View>
+
+					<View className="h-full w-52 items-center justify-center space-y-6">
+						<TouchableOpacity
+							className="bg-green-500 rounded-full px-3 py-2"
+							onPress={() => {
+								setPower(MID_VALUE);
+								setPosition(SLIDER_HEIGHT / 2);
+							}}
+						>
+							<Text className="font-bold text-xl text-white">N</Text>
+						</TouchableOpacity>
+
 						<Trootle
 							position={position}
 							panHandlers={panResponder.panHandlers}
-						></Trootle>
+						/>
 					</View>
 				</View>
 			</Modal>

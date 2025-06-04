@@ -1,25 +1,26 @@
+import React from "react";
 import { Image } from "react-native";
 
-import React from "react";
-
 const ImageViewer = () => {
-	const [imageUri, setImageUri] = React.useState(
-		"http://192.168.43.249/cam-hi.jpg"
-	);
+	const [tick, setTick] = React.useState(0);
 
 	React.useEffect(() => {
 		const interval = setInterval(() => {
-			setImageUri(`http://192.168.43.249/cam-hi.jpg`);
+			setTick((prev) => (prev + 1) % 1000);
 		}, 500);
 
 		return () => clearInterval(interval);
 	}, []);
 
+	const uri = `http://192.168.43.249/cam-hi.jpg?${tick}`;
+	const key = tick % 2;
+
 	return (
 		<Image
-			source={{ uri: imageUri }}
-			className="w-full h-full"
-			resizeMode="contain"
+			key={key}
+			source={{ uri }}
+			style={{ width: "100%", height: "100%" }}
+			resizeMode="cover"
 		/>
 	);
 };

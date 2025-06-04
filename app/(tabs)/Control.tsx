@@ -184,7 +184,7 @@ export default function Control() {
 						</TouchableOpacity>
 					</View>
 
-					<View className="flex-1 h-full items-center justify-center">
+					<View className="flex-1 h-full bg-background2 items-center justify-center">
 						<ImageViewer />
 					</View>
 
